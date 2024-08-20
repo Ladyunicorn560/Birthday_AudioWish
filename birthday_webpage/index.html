@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Mom!</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0e68c;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* To hide scrollbars if confetti goes off-screen */
+        }
+        h1 {
+            color: #ff6347;
+            margin-bottom: 20px;
+        }
+        #giftBox {
+            width: 150px;
+            height: 150px;
+            background-image: url('giftbox.png'); /* Updated image URL */
+            background-size: cover;
+            cursor: pointer;
+            background-position: center; /* Center the background image */
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Birthday Mom!</h1>
+    <div id="giftBox" onclick="openGift()"></div>
+
+    <audio id="audioPlayer" src="voice_message.mp3"></audio>
+
+    <!-- Include canvas-confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+        let confettiInterval;
+
+        function openGift() {
+            // Play the audio
+            var audio = document.getElementById('audioPlayer');
+            audio.play();
+
+            // Change the gift box image after clicking (like it’s opened)
+            document.getElementById('giftBox').style.backgroundImage = "url('mom.png')";
+
+            // Start continuous confetti
+            startConfetti();
+        }
+
+        function startConfetti() {
+            // Trigger confetti at regular intervals
+            confettiInterval = setInterval(() => {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }, 500); // Trigger confetti every 500ms (adjust as needed)
+        }
+
+        function stopConfetti() {
+            // Stop confetti after a certain time or based on any condition
+            clearInterval(confettiInterval);
+        }
+
+        // Optional: Stop confetti after 10 seconds (10000ms)
+        setTimeout(stopConfetti, 20000);
+    </script>
+</body>
+</html>
